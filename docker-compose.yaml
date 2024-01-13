@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+  livraria-nginx:
+    image: nginx:latest
+    container_name: livraria-nginx
+    ports:
+      - '8082:80'
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html/
+    links:
+      - livraria-php-fpm
+    networks:
+      - spassu
+    depends_on:
+      - livraria-php-fpm
+
+  livraria-php-fpm:
+    container_name: livraria-php-fpm
+    build:
+      context: docker
+    volumes:
+      - ./:/var/www/html/
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    environment:
+      PHP_IDE_CONFIG: serverName=livraria-app
+    ports:
+      - '9001:9001'
+      - '9000:9000'
+    expose:
+      - '9000'
+    links:
+      - livraria-database
+    networks:
+      - spassu
+    depends_on:
+      - livraria-database
+    restart: unless-stopped
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  livraria-database:
+    image: 'postgres:12'
+    container_name: livraria-database
+    expose:
+      - '5444'
+    ports:
+      - '5444:5432'
+    environment:
+      POSTGRES_PASSWORD: livraria@spassu
+      POSTGRES_USER: livraria
+      POSTGRES_DB: livraria
+    restart: unless-stopped
+    networks:
+      - spassu
+    volumes:
+      - livraria_database_data:/var/lib/postgresql
+
+volumes:
+  livraria_database_data:
+
+networks:
+  spassu:
