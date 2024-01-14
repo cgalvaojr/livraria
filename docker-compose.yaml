@@ -19,7 +19,9 @@ services:
   livraria-php-fpm:
     container_name: livraria-php-fpm
     build:
-      context: docker
+      context: .
+      dockerfile: docker/Dockerfile
+
     volumes:
       - ./:/var/www/html/
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
