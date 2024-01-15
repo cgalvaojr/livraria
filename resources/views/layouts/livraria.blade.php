@@ -16,7 +16,7 @@
 									<a class="nav-link" href="{{ route('autor.index')  }}">Autores</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#">Assuntos</a>
+									<a class="nav-link" href="{{ route('assunto.index')  }}">Assuntos</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">Livros</a>
