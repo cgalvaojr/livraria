@@ -5,7 +5,7 @@
         @csrf
         <div class="row">
             <div class="col-8">
-                <label for="CodAu" class="col-form-label">Nome do Autor</label>
+                <label for="Nome" class="col-form-label">Nome do Autor</label>
                 <input type="text" class="form-control" name="Nome" />
             </div>
         </div>

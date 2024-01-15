@@ -4,6 +4,7 @@ namespace App\Services\Livraria;
 
 use App\Models\Autor as AutorModel;
 use App\Services\ServiceInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class Autor implements ServiceInterface
 {
@@ -18,9 +19,12 @@ class Autor implements ServiceInterface
         return AutorModel::where('CodAu', $id)->update($dados);
     }
 
-    #[\Override] public function recuperar(int $id): AutorModel
+    #[\Override] public function recuperar(int $id = null): AutorModel| Collection
     {
-        return AutorModel::findOrFail($id)->first();
+        if($id) {
+            return AutorModel::findOrFail($id);
+        }
+        return AutorModel::all();
     }
 
     #[\Override] public function remover(int $id): bool

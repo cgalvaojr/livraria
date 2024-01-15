@@ -19,7 +19,7 @@
                             <td>{{ $autor->Nome }}</td>
                             <td>
                                 <button type="button" class="btn btn-info">
-                                    <a class="text-decoration-none text-white" href="{{ route('autor.edit', [ 'autor' => $autor ])  }}">Editar</a>
+                                    <a class="text-decoration-none text-white" href="{{ route('autor.edit', [ 'autor' => $autor->CodAu ])  }}">Editar</a>
                                 </button>
                                 <button type="button" class="btn btn-danger">
                                     <a class="text-decoration-none text-white" onclick="confirmaRemocao({{ $autor->CodAu }})">Remover</a>
@@ -41,7 +41,6 @@
     <script type="text/javascript">
         function confirmaRemocao(id) {
             if(confirm('Tem certeza que deseja remover o registro?')) {
-                const csrfToken = document.querySelector("[name~=csrf-token][content]").content;
                 fetch(`/autor/${id}`, {
                     method: 'DELETE',
                     headers: {

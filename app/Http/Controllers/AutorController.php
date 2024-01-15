@@ -20,7 +20,7 @@ class AutorController extends Controller
 
     public function index(): View
     {
-        return view('livraria.autor.index', [ 'autores' => Autor::all() ]);
+        return view('livraria.autor.index', ['autores' => $this->autorService->recuperar()]);
     }
 
     public function create(): View
