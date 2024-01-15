@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::resource('autor', \App\Http\Controllers\AutorController::class);
+
 Route::get('/', function () {
     return view('welcome');
 });
