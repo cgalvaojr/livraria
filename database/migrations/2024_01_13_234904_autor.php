@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('Autor', function(Blueprint $table) {
             $table->id('CodAu');
-            $table->string('Npme', 40);
+            $table->string('Nome', 40);
         });
     }
 

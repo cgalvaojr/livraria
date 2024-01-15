@@ -10,7 +10,10 @@
 						<div class="collapse navbar-collapse" id="navbarColor01">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item">
-									<a class="nav-link" href="#">Autores</a>
+									<a class="nav-link" href="/">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{{ route('autor.index')  }}">Autores</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">Assuntos</a>
@@ -24,6 +27,15 @@
 				</nav>
 				<div class="container mt-2">
 					<div class="col-12">
+						@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+						@endif
 						@yield('content')
 					</div>
 				</div>
