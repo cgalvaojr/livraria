@@ -19,7 +19,7 @@ class Autor implements ServiceInterface
         return AutorModel::where('CodAu', $id)->update($dados);
     }
 
-    #[\Override] public function recuperar(int $id = null): AutorModel| Collection
+    #[\Override] public function listar(int $id = null): AutorModel| Collection
     {
         if($id) {
             return AutorModel::findOrFail($id);

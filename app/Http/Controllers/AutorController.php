@@ -20,7 +20,7 @@ class AutorController extends Controller
 
     public function index(): View
     {
-        return view('livraria.autor.index', ['autores' => $this->autorService->recuperar()]);
+        return view('livraria.autor.index', ['autores' => $this->autorService->listar()]);
     }
 
     public function create(): View
@@ -31,13 +31,13 @@ class AutorController extends Controller
     public function store(AutorRequest $request): RedirectResponse
     {
         $this->autorService->salvar($request->all(['Nome']));
-        return redirect('autor');
+        return redirect('autor')->with('success', 'Autor cadastrado com sucesso!');
     }
 
     public function edit(string $id)
     {
         try {
-            $autor = $this->autorService->recuperar($id);
+            $autor = $this->autorService->listar($id);
             return view('livraria.autor.edit', ['autor' => $autor]);
         } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
@@ -47,12 +47,12 @@ class AutorController extends Controller
     public function update(AutorRequest $request, string $id): RedirectResponse
     {
             $this->autorService->alterar($request->all(['Nome']), $id);
-            return redirect('autor');
+            return redirect('autor')->with('success', 'Autor atualizado com sucesso!');
     }
 
     public function destroy(string $id): RedirectResponse
     {
         $this->autorService->remover($id);
-        return redirect('autor');
+        return redirect('autor')->with('success', 'Autor removido com sucesso!');
     }
 }

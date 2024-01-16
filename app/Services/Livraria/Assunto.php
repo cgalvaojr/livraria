@@ -19,7 +19,7 @@ class Assunto implements ServiceInterface
         return AssuntoModel::where('CodAs', $id)->update($dados);
     }
 
-    #[\Override] public function recuperar(int $id = null): AssuntoModel| Collection
+    #[\Override] public function listar(int $id = null): AssuntoModel| Collection
     {
         if($id) {
             return AssuntoModel::findOrFail($id);

@@ -4,8 +4,8 @@
     <h3>Autores</h3>
     <div class="col-12">
         @if(sizeof($autores) > 0)
-            <table class="table">
-                <thead>
+            <table class="table table-responsive">
+                <thead class="thead-dark">
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>

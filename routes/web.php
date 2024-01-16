@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('autor', \App\Http\Controllers\AutorController::class);
 Route::resource('assunto', \App\Http\Controllers\AssuntoController::class);
+Route::resource('livro', \App\Http\Controllers\LivroController::class);
 
 Route::get('/', function () {
     return view('welcome');

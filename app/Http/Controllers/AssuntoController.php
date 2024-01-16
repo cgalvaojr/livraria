@@ -18,7 +18,7 @@ class AssuntoController extends Controller
 
     public function index(): View
     {
-        return view('livraria.assunto.index', ['assuntos' => $this->assuntoService->recuperar()]);
+        return view('livraria.assunto.index', ['assuntos' => $this->assuntoService->listar()]);
     }
 
     public function create(): View
@@ -29,13 +29,13 @@ class AssuntoController extends Controller
     public function store(AssuntoRequest $request): RedirectResponse
     {
         $this->assuntoService->salvar($request->all(['Descricao']));
-        return redirect('assunto');
+        return redirect('assunto')->with('success', 'Assunto cadastrado com sucesso!');
     }
 
     public function edit(string $id)
     {
         try {
-            $assunto = $this->assuntoService->recuperar($id);
+            $assunto = $this->assuntoService->listar($id);
             return view('livraria.assunto.edit', ['assunto' => $assunto]);
         } catch (ModelNotFoundException $e) {
             abort(404, $e->getMessage());
@@ -45,12 +45,12 @@ class AssuntoController extends Controller
     public function update(AssuntoRequest $request, string $id): RedirectResponse
     {
         $this->assuntoService->alterar($request->all(['Descricao']), $id);
-        return redirect('assunto');
+        return redirect('assunto')->with('success', 'Assunto atualizado com sucesso!');
     }
 
     public function destroy(string $id): RedirectResponse
     {
         $this->assuntoService->remover($id);
-        return redirect('assunto');
+        return redirect('assunto')->with('success', 'Assunto removido com sucesso!');
     }
 }
