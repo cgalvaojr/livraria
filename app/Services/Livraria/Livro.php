@@ -82,6 +82,8 @@ class Livro implements ServiceInterface
     #[\Override] public function remover(int $id): bool
     {
        LivroModel::destroy($id);
+       LivroAssuntoModel::where('Livro_Codl', $id)->delete();
+       LivroAutorModel::where('Livro_Codl', $id)->delete();
        return true;
     }
 }
