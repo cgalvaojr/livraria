@@ -29,7 +29,11 @@ class Autor implements ServiceInterface
 
     #[\Override] public function remover(int $id): bool
     {
-       AutorModel::destroy($id);
-       return true;
+        $autor = AutorModel::findOrFail($id);
+        if ($autor->livro()->exists()) {
+            throw new \Exception('Não foi possível remover o autor, pois existe livro relacionado a ele.');
+        }
+        $autor->destroy($id);
+        return true;
     }
 }

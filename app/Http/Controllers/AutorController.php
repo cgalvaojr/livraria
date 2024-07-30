@@ -52,7 +52,11 @@ class AutorController extends Controller
 
     public function destroy(string $id): RedirectResponse
     {
-        $this->autorService->remover($id);
-        return redirect('autor')->with('success', 'Autor removido com sucesso!');
+        try {
+            $this->autorService->remover($id);
+            return redirect('autor')->with('success', 'Autor removido com sucesso!');
+        } catch (\Exception $e) {
+            return redirect('autor')->with('error', $e->getMessage());
+        }
     }
 }

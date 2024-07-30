@@ -35,7 +35,7 @@ class Assunto implements ServiceInterface
             throw new \Exception('Não foi possível remover o assunto, pois existe livro relacionado a ele.');
         }
 
-        AssuntoModel::destroy($id);
+        $assunto->destroy($id);
         return true;
     }
 }
