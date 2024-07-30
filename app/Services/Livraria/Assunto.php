@@ -29,7 +29,13 @@ class Assunto implements ServiceInterface
 
     #[\Override] public function remover(int $id): bool
     {
-       AssuntoModel::destroy($id);
-       return true;
+        $assunto = AssuntoModel::findOrFail($id);
+
+        if ($assunto->livro()->exists()) {
+            throw new \Exception('Não foi possível remover o assunto, pois existe livro relacionado a ele.');
+        }
+
+        AssuntoModel::destroy($id);
+        return true;
     }
 }

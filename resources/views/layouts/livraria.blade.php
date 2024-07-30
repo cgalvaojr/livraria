@@ -49,6 +49,13 @@
 								</ul>
 							</div>
 						@endif
+						@if (session('error'))
+							<div class="aler mb-2">
+								<ul class="list-group">
+									<li class="list-group-item list-group-item-danger mt-1">{{ session('error') }}</li>
+								</ul>
+							</div>
+						@endif
 
 						@yield('content')
 					</div>

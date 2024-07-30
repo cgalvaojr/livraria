@@ -10,4 +10,9 @@ class Assunto extends Model
     protected $primaryKey = 'CodAs';
     public $timestamps = false;
     protected $fillable = ['Descricao'];
+
+    public function livro()
+    {
+        return $this->belongsTo(Livro_Assunto::class, 'CodAs', 'Assunto_codAs');
+    }
 }

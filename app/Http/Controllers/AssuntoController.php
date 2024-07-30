@@ -50,7 +50,11 @@ class AssuntoController extends Controller
 
     public function destroy(string $id): RedirectResponse
     {
-        $this->assuntoService->remover($id);
-        return redirect('assunto')->with('success', 'Assunto removido com sucesso!');
-    }
+        try {
+            $this->assuntoService->remover($id);
+            return redirect('assunto')->with('success', 'Assunto removido com sucesso!');
+        } catch (\Exception $e) {
+            return redirect('assunto')->with('error', $e->getMessage());
+        }
+     }
 }
